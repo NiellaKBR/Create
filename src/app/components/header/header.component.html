@@ -1,0 +1,90 @@
+<header class="fixed w-full top-0 z-50 bg-white shadow-lg transition-all duration-300">
+  <nav class="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-3 cursor-pointer" routerLink="/">
+      <div class="w-12 h-12 bg-gradient-to-br from-durex-green to-green-600 rounded-xl flex items-center justify-center shadow-md transform hover:scale-105 transition-transform">
+        <span class="text-white font-bold text-2xl">D</span>
+      </div>
+      <div class="hidden sm:block">
+        <span class="text-2xl font-bold text-gray-800">DUREX</span>
+        <p class="text-xs text-gray-500">Management</p>
+      </div>
+    </div>
+
+    <ul class="hidden md:flex space-x-8 items-center">
+      <li><a routerLink="/" routerLinkActive="text-durex-green font-semibold" [routerLinkActiveOptions]="{exact: true}" class="hover:text-durex-green transition-colors duration-300 cursor-pointer">Accueil</a></li>
+      <li><a routerLink="/services" routerLinkActive="text-durex-green font-semibold" class="hover:text-durex-green transition-colors duration-300 cursor-pointer">Services</a></li>
+      <li><a routerLink="/about" routerLinkActive="text-durex-green font-semibold" class="hover:text-durex-green transition-colors duration-300 cursor-pointer">À propos</a></li>
+      <li><a routerLink="/contact" routerLinkActive="text-durex-green font-semibold" class="hover:text-durex-green transition-colors duration-300 cursor-pointer">Contact</a></li>
+    </ul>
+
+    <!-- Bouton Connexion OU Menu Utilisateur -->
+    <div class="hidden md:block">
+      <!-- Si NON connecté -->
+      <button *ngIf="!currentUser" routerLink="/auth" class="bg-durex-green text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
+        Connexion
+      </button>
+
+      <!-- Si connecté -->
+      <div *ngIf="currentUser" class="relative">
+        <button (click)="toggleUserMenu()" class="flex items-center gap-3 backdrop-blur-lg bg-durex-green/10 border border-durex-green/30 px-5 py-2.5 rounded-lg hover:bg-durex-green/20 transition-all duration-300">
+          <div class="w-8 h-8 bg-gradient-to-br from-durex-green to-emerald-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+            {{ currentUser.prenom.charAt(0) }}{{ currentUser.nom.charAt(0) }}
+          </div>
+          <span class="font-medium text-gray-800">{{ currentUser.prenom }}</span>
+          <svg class="w-4 h-4 text-gray-600 transition-transform" [class.rotate-180]="isUserMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div *ngIf="isUserMenuOpen" class="absolute right-0 mt-2 w-64 backdrop-blur-xl bg-white/95 border border-gray-200 rounded-xl shadow-2xl py-2 animate-fade-in">
+          <div class="px-4 py-3 border-b border-gray-200">
+            <p class="text-sm font-semibold text-gray-800">{{ currentUser.prenom }} {{ currentUser.nom }}</p>
+            <p class="text-xs text-gray-500">{{ currentUser.email }}</p>
+          </div>
+          <button (click)="logout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            Déconnexion
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Burger Mobile -->
+    <button (click)="toggleMenu()" class="md:hidden text-gray-800 focus:outline-none">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Menu Mobile -->
+  <div *ngIf="isMenuOpen" class="md:hidden bg-white border-t shadow-lg animate-fade-in">
+    <ul class="flex flex-col p-4 space-y-3">
+      <li><a routerLink="/" (click)="toggleMenu()" class="block py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-durex-green transition-all">🏠 Accueil</a></li>
+      <li><a routerLink="/services" (click)="toggleMenu()" class="block py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-durex-green transition-all">💼 Services</a></li>
+      <li><a routerLink="/about" (click)="toggleMenu()" class="block py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-durex-green transition-all">ℹ️ À propos</a></li>
+      <li><a routerLink="/contact" (click)="toggleMenu()" class="block py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-durex-green transition-all">📧 Contact</a></li>
+      
+      <li class="pt-2" *ngIf="!currentUser">
+        <button routerLink="/auth" (click)="toggleMenu()" class="w-full bg-durex-green text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-all shadow-md">
+          🔐 Connexion
+        </button>
+      </li>
+
+      <li *ngIf="currentUser" class="pt-2 border-t">
+        <div class="px-4 py-2 text-sm">
+          <p class="font-semibold text-gray-800">{{ currentUser.prenom }} {{ currentUser.nom }}</p>
+          <p class="text-xs text-gray-500">{{ currentUser.email }}</p>
+        </div>
+        <button (click)="logout(); toggleMenu()" class="w-full mt-2 bg-red-50 text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-red-100 transition-all">
+          Déconnexion
+        </button>
+      </li>
+    </ul>
+  </div>
+</header>
+<div class="h-20"></div>
