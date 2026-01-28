@@ -14,18 +14,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthComponent {
   isLoginMode = true;
-  
+
   // Formulaire Connexion
   loginEmail = '';
   loginPassword = '';
-  
+
   // Formulaire Inscription
   registerPrenom = '';
   registerNom = '';
   registerEmail = '';
   registerPassword = '';
   registerConfirmPassword = '';
-  
+
   // Messages
   errorMessage = '';
   successMessage = '';
@@ -34,7 +34,13 @@ export class AuthComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
+
+  // Nouvelle méthode pour le toggle
+  setLoginMode(mode: boolean) {
+    this.isLoginMode = mode;
+    this.clearMessages();
+  }
 
   // Bascule entre Connexion et Inscription
   toggleMode() {
@@ -102,6 +108,7 @@ export class AuthComponent {
         this.registerEmail,
         this.registerPassword
       );
+
       this.isLoading = false;
 
       if (result.success) {
