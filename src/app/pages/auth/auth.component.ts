@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,18 +14,15 @@ import { AuthService } from '../../services/auth.service';
 export class AuthComponent {
   isLoginMode = true;
 
-  // Formulaire Connexion
   loginEmail = '';
   loginPassword = '';
 
-  // Formulaire Inscription
   registerPrenom = '';
   registerNom = '';
   registerEmail = '';
   registerPassword = '';
   registerConfirmPassword = '';
 
-  // Messages
   errorMessage = '';
   successMessage = '';
   isLoading = false;
@@ -36,19 +32,16 @@ export class AuthComponent {
     private router: Router
   ) { }
 
-  // Nouvelle méthode pour le toggle
   setLoginMode(mode: boolean) {
     this.isLoginMode = mode;
     this.clearMessages();
   }
 
-  // Bascule entre Connexion et Inscription
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
     this.clearMessages();
   }
 
-  // Connexion
   onLogin() {
     this.clearMessages();
 
@@ -66,7 +59,7 @@ export class AuthComponent {
       if (result.success) {
         this.successMessage = `Bienvenue ${result.user?.prenom} ! 🎉`;
         setTimeout(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard']);
         }, 1500);
       } else {
         this.errorMessage = result.message;
@@ -74,11 +67,9 @@ export class AuthComponent {
     }, 800);
   }
 
-  // Inscription
   onRegister() {
     this.clearMessages();
 
-    // Validations
     if (!this.registerPrenom || !this.registerNom || !this.registerEmail || !this.registerPassword) {
       this.errorMessage = 'Veuillez remplir tous les champs';
       return;
@@ -114,7 +105,7 @@ export class AuthComponent {
       if (result.success) {
         this.successMessage = `Bienvenue ${this.registerPrenom} ! Votre compte a été créé 🎉`;
         setTimeout(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard']); // CORRECTION: enlever le ;;
         }, 1500);
       } else {
         this.errorMessage = result.message;
@@ -122,7 +113,6 @@ export class AuthComponent {
     }, 800);
   }
 
-  // Utilitaires
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

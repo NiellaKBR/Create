@@ -61,6 +61,7 @@ export class AuthService {
   }
 
   // Connexion
+  // Dans auth.service.ts, méthode login
   login(email: string, password: string): { success: boolean; message: string; user?: User } {
     const users = this.getAllUsers();
     const user = users.find(u => u.email === email && u.password === password);
@@ -69,13 +70,12 @@ export class AuthService {
       return { success: false, message: 'Email ou mot de passe incorrect' };
     }
 
-    // Stocke l'utilisateur connecté
+    // IMPORTANT: Ces deux lignes doivent être présentes
     localStorage.setItem('currentUser', JSON.stringify(user));
-    this.currentUserSubject.next(user);
+    this.currentUserSubject.next(user); // ← Cette ligne est CRUCIALE
 
     return { success: true, message: 'Connexion réussie !', user };
   }
-
   // Déconnexion
   logout() {
     localStorage.removeItem('currentUser');

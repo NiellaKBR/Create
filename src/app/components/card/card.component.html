@@ -1,1 +1,42 @@
-<p>card works!</p>
+<div
+    class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-durex-green/30 hover:-translate-y-2 cursor-pointer overflow-hidden">
+
+    <!-- Gradient hover -->
+    <div
+        class="absolute inset-0 bg-gradient-to-br from-durex-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+    </div>
+
+    <!-- Contenu -->
+    <div class="relative z-10">
+        <div class="text-6xl mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+            {{ icon }}
+        </div>
+
+        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-durex-green transition-colors">
+            {{ title }}
+        </h3>
+
+        <p class="text-gray-600 leading-relaxed mb-6">
+            {{ description }}
+        </p>
+
+        <!-- Badge Premium -->
+        <div *ngIf="isPriority" class="inline-block mb-4 px-3 py-1 bg-gradient-to-r"
+            [ngClass]="'bg-gradient-to-r ' + gradient" class="text-white text-xs font-semibold rounded-full">
+            ⭐ Premium
+        </div>
+
+        <!-- Button action -->
+        <div class="flex items-center text-durex-green font-semibold group-hover:translate-x-2 transition-transform">
+            {{ actionText }}
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6">
+                </path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Indicateur hover en bas -->
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r" [ngClass]="'bg-gradient-to-r ' + gradient"
+        class="transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+</div>
