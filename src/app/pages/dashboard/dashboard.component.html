@@ -1,64 +1,113 @@
+<!-- Bouton pour ouvrir sidebar (mobile) -->
+<button (click)="toggleSidebar()"
+        class="fixed top-24 left-4 z-30 lg:hidden bg-durex-green text-white p-3 rounded-xl shadow-lg hover:shadow-xl transition-all">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+</button>
+
+<!-- Sidebar -->
+<app-sidebar
+  [isOpen]="isSidebarOpen"
+  [userRole]="'client'"
+  (closeSidebar)="closeSidebar()"
+  (menuClick)="onMenuClick($event)">
+</app-sidebar>
+
+<!-- Contenu principal avec marge pour la sidebar -->
+<main class="lg:ml-80 transition-all duration-300">
 <section class="min-h-screen bg-gradient-to-br from-slate-50 to-white pt-24 pb-16">
-    <div class="container mx-auto px-4">
+  <div class="container mx-auto px-4">
 
-        <!-- Header Personnalisé -->
-        <div class="bg-white rounded-3xl p-8 mb-8 shadow-xl border border-gray-100">
-            <div class="flex items-center gap-6">
-                <div
-                    class="w-20 h-20 bg-gradient-to-br from-durex-green to-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold">
-                    {{ currentUser?.prenom?.charAt(0) }}{{ currentUser?.nom?.charAt(0) }}
-                </div>
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">
-                        Bonjour {{ currentUser?.prenom }} ! 👋
-                    </h1>
-                    <p class="text-gray-600">
-                        Bienvenue dans votre espace client premium DUREX Management
-                    </p>
-                </div>
-            </div>
+    <!-- Header Personnalisé -->
+    <div class="bg-white rounded-3xl p-8 mb-8 shadow-xl border border-gray-100">
+      <div class="flex items-center gap-6">
+        <div class="w-20 h-20 bg-gradient-to-br from-durex-green to-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold">
+          {{ currentUser?.prenom?.charAt(0) || 'U' }}{{ currentUser?.nom?.charAt(0) || 'U' }}
         </div>
-
-        <!-- Badge exclusif -->
-        <div class="text-center mb-12">
-            <span
-                class="inline-block px-6 py-3 bg-gradient-to-r from-durex-green to-emerald-500 text-white rounded-full font-semibold shadow-lg">
-                🌟 Services Premium Exclusifs
-            </span>
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">
+            Bonjour {{ currentUser?.prenom || 'Utilisateur' }} ! 👋
+          </h1>
+          <p class="text-gray-600">
+            Bienvenue dans votre espace client premium DUREX Management
+          </p>
         </div>
-
-        <!-- Services Cards Premium -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <app-card *ngFor="let service of premiumServices" [title]="service.title"
-                [description]="service.description" [icon]="service.icon" [isPriority]="service.isPriority"
-                [gradient]="service.gradient" [actionText]="'Accéder maintenant'">
-            </app-card>
-        </div>
-
-        <!-- Section recommandations personnalisées -->
-        <div class="bg-gradient-to-r from-durex-green to-emerald-500 rounded-3xl p-8 text-white">
-            <h2 class="text-2xl font-bold mb-4">🎯 Recommandations pour {{ currentUser?.prenom }}</h2>
-            <p class="text-white/90 mb-6">
-                Basé sur votre profil et historique, voici nos suggestions prioritaires :
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-xl">
-                    <div class="text-2xl mb-2">💼</div>
-                    <h3 class="font-semibold mb-1">Audit Comptable</h3>
-                    <p class="text-sm text-white/80">Recommandé pour optimiser vos finances</p>
-                </div>
-                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-xl">
-                    <div class="text-2xl mb-2">📋</div>
-                    <h3 class="font-semibold mb-1">Formation RH</h3>
-                    <p class="text-sm text-white/80">Développez les compétences de vos équipes</p>
-                </div>
-                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-xl">
-                    <div class="text-2xl mb-2">⚖️</div>
-                    <h3 class="font-semibold mb-1">Conseil Juridique</h3>
-                    <p class="text-sm text-white/80">Sécurisez vos contrats et procédures</p>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
+
+    <!-- Badge exclusif -->
+    <div class="text-center mb-12">
+      <span class="inline-block px-6 py-3 bg-gradient-to-r from-durex-green to-emerald-500 text-white rounded-full font-semibold shadow-lg">
+        🌟 Services Premium Exclusifs
+      </span>
+    </div>
+
+    <!-- Services Cards Premium avec actions cliquables -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div *ngFor="let service of premiumServices"
+           (click)="service.action === 'openDevisModal' ? openDevisModal() : openContactModal()"
+           class="cursor-pointer">
+        <app-card
+          [title]="service.title"
+          [description]="service.description"
+          [icon]="service.icon"
+          [isPriority]="service.isPriority"
+          [gradient]="service.gradient"
+          [actionText]="'Demander maintenant'">
+        </app-card>
+      </div>
+    </div>
+
+    <!-- Section recommandations -->
+    <div class="bg-gradient-to-r from-durex-green to-emerald-500 rounded-3xl p-8 text-white">
+      <h2 class="text-2xl font-bold mb-4">🎯 Recommandé pour {{ currentUser?.prenom || 'vous' }}</h2>
+      <p class="text-white/90 mb-6">Basé sur votre profil, nos suggestions prioritaires :</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white/20 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-2xl mb-2">💼</div>
+          <h3 class="font-semibold mb-1">Audit Comptable</h3>
+          <p class="text-sm text-white/80">Optimisez vos finances</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-2xl mb-2">📋</div>
+          <h3 class="font-semibold mb-1">Formation RH</h3>
+          <p class="text-sm text-white/80">Développez vos équipes</p>
+        </div>
+        <div class="bg-white/20 backdrop-blur-sm p-4 rounded-xl">
+          <div class="text-2xl mb-2">⚖️</div>
+          <h3 class="font-semibold mb-1">Conseil Juridique</h3>
+          <p class="text-sm text-white/80">Sécurisez vos contrats</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
+<!-- Modals (en dehors de la section principale) -->
+<app-modal
+  [isOpen]="isDevisModalOpen"
+  [title]="'Devis Express'"
+  [type]="'devis'"
+  (closeModal)="closeModal()"
+  (submitForm)="onDevisSubmit($event)">
+</app-modal>
+
+<app-modal
+  [isOpen]="isContactModalOpen"
+  [title]="'Contact Rapide'"
+  [type]="'contact'"
+  (closeModal)="closeModal()">
+</app-modal>
+<!-- Dans dashboard.component.html -->
+<div class="mt-12">
+  <app-table
+    title="Mes Services Actifs"
+    type="services"
+    (rowClick)="onTableRowClick($event)"
+    (actionClick)="onTableActionClick($event)">
+  </app-table>
+</div>
+
+</main>

@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     title: 'Tableau de Bord',
-    canActivate: [authGuard]
+    //canActivate: [authGuard]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

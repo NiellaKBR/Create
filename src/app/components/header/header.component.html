@@ -22,56 +22,33 @@
           class="hover:text-durex-green transition-colors duration-300 cursor-pointer">Contact</a></li>
     </ul>
 
-    <!-- Bouton Connexion OU Menu Utilisateur -->
-    <div class="hidden md:block">
+    <!-- Section droite avec CTA + Connexion -->
+    <div class="hidden md:flex items-center gap-4">
+      <!-- Bouton CTA Devis Express -->
+      <button (click)="openDevisModal()"
+              class="bg-gradient-to-r from-durex-green to-emerald-500 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all text-sm">
+        ⚡ Devis Express
+      </button>
+
+      <!-- Bouton Connexion OU Menu Utilisateur -->
       <!-- Si NON connecté -->
       <button *ngIf="!currentUser" routerLink="/auth"
         class="bg-durex-green text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
         Connexion
       </button>
 
-      <!-- Si connecté -->
-      <div *ngIf="currentUser" class="relative">
-        <button (click)="toggleUserMenu()"
-          class="flex items-center gap-3 backdrop-blur-lg bg-durex-green/10 border border-durex-green/30 px-5 py-2.5 rounded-lg hover:bg-durex-green/20 transition-all duration-300">
-          <div
-            class="w-8 h-8 bg-gradient-to-br from-durex-green to-emerald-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-            {{ currentUser.prenom.charAt(0) }}{{ currentUser.nom.charAt(0) }}
+      <!-- Si connecté - Version simple et professionnelle -->
+      <div *ngIf="currentUser" class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-gradient-to-br from-durex-green to-emerald-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+            {{ currentUser?.prenom?.charAt(0) || 'U' }}{{ currentUser?.nom?.charAt(0) || '' }}
           </div>
-          <span class="font-medium text-gray-800">{{ currentUser.prenom }}</span>
-          <svg class="w-4 h-4 text-gray-600 transition-transform" [class.rotate-180]="isUserMenuOpen" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-
-        <!-- Dropdown menu -->
-        <div *ngIf="isUserMenuOpen"
-          class="absolute right-0 mt-2 w-64 backdrop-blur-xl bg-white/95 border border-gray-200 rounded-xl shadow-2xl py-2 animate-fade-in">
-          <div class="px-4 py-3 border-b border-gray-200">
-            <p class="text-sm font-semibold text-gray-800">{{ currentUser.prenom }} {{ currentUser.nom }}</p>
-            <p class="text-xs text-gray-500">{{ currentUser.email }}</p>
-          </div>
-
-          <!-- Nouveau bouton Connexion -->
-          <a routerLink="/auth" (click)="toggleUserMenu()"
-            class="w-full text-left px-4 py-2 text-sm text-durex-green hover:bg-durex-green/10 transition-colors flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-            </svg>
-            Connexion
-          </a>
-
-          <button (click)="logout()"
-            class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-            </svg>
-            Déconnexion
-          </button>
+          <span class="font-medium text-gray-800">{{ currentUser?.prenom || 'Utilisateur' }}</span>
         </div>
+        <button (click)="logout()"
+          class="bg-red-50 text-red-600 px-4 py-2 rounded-lg font-medium hover:bg-red-100 transition-all">
+          Déconnexion
+        </button>
       </div>
     </div>
 
@@ -100,6 +77,14 @@
       <li><a routerLink="/contact" (click)="toggleMenu()"
           class="block py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-durex-green transition-all">📧 Contact</a></li>
 
+      <!-- CTA mobile -->
+      <li class="pt-2">
+        <button (click)="openDevisModal(); toggleMenu()"
+          class="w-full bg-gradient-to-r from-durex-green to-emerald-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all shadow-md">
+          ⚡ Devis Express
+        </button>
+      </li>
+
       <li class="pt-2" *ngIf="!currentUser">
         <button routerLink="/auth" (click)="toggleMenu()"
           class="w-full bg-durex-green text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-all shadow-md">
@@ -108,12 +93,12 @@
       </li>
 
       <li *ngIf="currentUser" class="pt-2 border-t">
-        <div class="px-4 py-2 text-sm">
-          <p class="font-semibold text-gray-800">{{ currentUser.prenom }} {{ currentUser.nom }}</p>
-          <p class="text-xs text-gray-500">{{ currentUser.email }}</p>
+        <div class="px-4 py-2 text-sm mb-2">
+          <p class="font-semibold text-gray-800">{{ currentUser?.prenom || 'Utilisateur' }} {{ currentUser?.nom || '' }}</p>
+          <p class="text-xs text-gray-500">{{ currentUser?.email || '' }}</p>
         </div>
         <button (click)="logout(); toggleMenu()"
-          class="w-full mt-2 bg-red-50 text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-red-100 transition-all">
+          class="w-full bg-red-50 text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-red-100 transition-all">
           Déconnexion
         </button>
       </li>

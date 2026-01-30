@@ -1,1 +1,170 @@
-<p>table works!</p>
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+
+  <!-- Header avec titre et recherche -->
+  <div class="bg-gradient-to-r from-durex-green to-emerald-500 px-6 py-4 text-white">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+          <span class="text-lg">{{ type === 'services' ? '💼' : type === 'requests' ? '📋' : type === 'billing' ? '💳' : '👥' }}</span>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold">{{ title }}</h3>
+          <p class="text-sm text-white/80">{{ filteredAndSortedData.length }} éléments</p>
+        </div>
+      </div>
+
+      <!-- Recherche -->
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <input
+            [(ngModel)]="searchTerm"
+            type="text"
+            placeholder="Rechercher..."
+            class="bg-white/20 text-white placeholder-white/60 px-4 py-2 rounded-lg text-sm focus:outline-none focus:bg-white/30 transition-all w-64">
+          <svg class="absolute right-3 top-2.5 w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+          <!-- Headers dynamiques selon le type -->
+          <th *ngIf="type === 'services'"
+              (click)="sort('service')"
+              class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+            <div class="flex items-center gap-2">
+              Service
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+              </svg>
+            </div>
+          </th>
+
+          <th *ngIf="type === 'services'"
+              (click)="sort('client')"
+              class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+            Client
+          </th>
+
+          <th *ngIf="type === 'services'"
+              (click)="sort('dateDebut')"
+              class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+            Date
+          </th>
+
+          <th *ngIf="type === 'services'"
+              (click)="sort('statut')"
+              class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+            Statut
+          </th>
+
+          <th *ngIf="type === 'services'"
+              (click)="sort('montant')"
+              class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+            Montant
+          </th>
+
+          <!-- Headers pour autres types... (similaire) -->
+
+          <th class="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-200">
+        <tr *ngFor="let item of paginatedData; let i = index"
+            (click)="onRowClick(item)"
+            class="hover:bg-gray-50 transition-colors cursor-pointer">
+
+          <!-- Services Table -->
+          <ng-container *ngIf="type === 'services'">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <span class="text-lg">{{ getPriorityIcon(item.priorite) }}</span>
+                <div>
+                  <div class="font-semibold text-gray-900">{{ item.service }}</div>
+                  <div class="text-sm text-gray-500">ID: {{ item.id }}</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="font-medium text-gray-900">{{ item.client }}</div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="text-sm text-gray-900">{{ item.dateDebut }}</div>
+            </td>
+            <td class="px-6 py-4">
+              <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full" [class]="getStatusClass(item.statut)">
+                {{ item.statut }}
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <div class="font-semibold text-durex-green">{{ item.montant }}</div>
+            </td>
+          </ng-container>
+
+          <!-- Actions -->
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button (click)="onActionClick('view', item); $event.stopPropagation()"
+                      class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </button>
+              <button (click)="onActionClick('edit', item); $event.stopPropagation()"
+                      class="text-durex-green hover:text-green-800 p-2 rounded-lg hover:bg-green-50 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="bg-gray-50 px-6 py-4 border-t">
+    <div class="flex items-center justify-between">
+      <div class="text-sm text-gray-500">
+        Affichage {{ (currentPage - 1) * itemsPerPage + 1 }} à {{ Math.min(currentPage * itemsPerPage, filteredAndSortedData.length) }} sur {{ filteredAndSortedData.length }} résultats
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button (click)="changePage(currentPage - 1)"
+                [disabled]="currentPage === 1"
+                class="px-3 py-2 text-sm bg-white border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+          Précédent
+        </button>
+
+        <div class="flex gap-1">
+          <button *ngFor="let page of [].constructor(totalPages); let i = index"
+                  (click)="changePage(i + 1)"
+                  [class.bg-durex-green]="currentPage === i + 1"
+                  [class.text-white]="currentPage === i + 1"
+                  [class.bg-white]="currentPage !== i + 1"
+                  class="px-3 py-2 text-sm border rounded-lg hover:bg-gray-50 transition-all">
+            {{ i + 1 }}
+          </button>
+        </div>
+
+        <button (click)="changePage(currentPage + 1)"
+                [disabled]="currentPage === totalPages"
+                class="px-3 py-2 text-sm bg-white border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+          Suivant
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

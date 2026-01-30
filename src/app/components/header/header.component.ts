@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+openDevisModal() {
+throw new Error('Method not implemented.');
+}
   isMenuOpen = false;
   isUserMenuOpen = false;
   currentUser: User | null = null;
