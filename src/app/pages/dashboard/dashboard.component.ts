@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { AuthService, User } from '../../services/auth.service';
 import { CardComponent } from '../../components/card/card.component';
 import { ModalComponent } from '../../components/modal/modal.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component'; // ← Ajout
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { TableComponent } from "../../components/table/table.component"; // ← Ajout
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, CardComponent, ModalComponent, SidebarComponent], // ← Ajout SidebarComponent
+  imports: [CommonModule, CardComponent, ModalComponent, SidebarComponent, TableComponent], // ← Ajout SidebarComponent
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -112,11 +113,11 @@ export class DashboardComponent implements OnInit {
     alert('Demande de devis envoyée avec succès ! Nous vous contacterons sous 24h.');
   }
   onTableRowClick(item: any) {
-  console.log('Ligne cliquée:', item);
-}
+    console.log('Ligne cliquée:', item);
+  }
 
-onTableActionClick(event: {action: string, item: any}) {
-  console.log('Action:', event.action, 'Item:', event.item);
-}
+  onTableActionClick(event: { action: string, item: any }) {
+    console.log('Action:', event.action, 'Item:', event.item);
+  }
 
 }
