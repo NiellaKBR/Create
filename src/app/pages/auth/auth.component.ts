@@ -13,16 +13,19 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthComponent {
   isLoginMode = true;
-
+  
+  // Formulaire Connexion
   loginEmail = '';
   loginPassword = '';
-
+  
+  // Formulaire Inscription
   registerPrenom = '';
   registerNom = '';
   registerEmail = '';
   registerPassword = '';
   registerConfirmPassword = '';
-
+  
+  // Messages
   errorMessage = '';
   successMessage = '';
   isLoading = false;
@@ -30,19 +33,19 @@ export class AuthComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) { }
-
-  setLoginMode(mode: boolean) {
-    this.isLoginMode = mode;
-    this.clearMessages();
+  ) {
+    console.log('AuthComponent initialized');
   }
 
+  // Bascule entre Connexion et Inscription
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
     this.clearMessages();
   }
 
+  // Connexion
   onLogin() {
+    console.log('onLogin called');
     this.clearMessages();
 
     if (!this.loginEmail || !this.loginPassword) {
@@ -54,12 +57,17 @@ export class AuthComponent {
 
     setTimeout(() => {
       const result = this.authService.login(this.loginEmail, this.loginPassword);
+      console.log('Login result:', result);
       this.isLoading = false;
 
       if (result.success) {
         this.successMessage = `Bienvenue ${result.user?.prenom} ! 🎉`;
+        console.log('Redirecting to home...');
+        
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/'])
+            .then(success => console.log('Navigation success:', success))
+            .catch(err => console.error('Navigation error:', err));
         }, 1500);
       } else {
         this.errorMessage = result.message;
@@ -67,9 +75,12 @@ export class AuthComponent {
     }, 800);
   }
 
+  // Inscription
   onRegister() {
+    console.log('onRegister called');
     this.clearMessages();
 
+    // Validations
     if (!this.registerPrenom || !this.registerNom || !this.registerEmail || !this.registerPassword) {
       this.errorMessage = 'Veuillez remplir tous les champs';
       return;
@@ -99,13 +110,17 @@ export class AuthComponent {
         this.registerEmail,
         this.registerPassword
       );
-
+      console.log('Register result:', result);
       this.isLoading = false;
 
       if (result.success) {
         this.successMessage = `Bienvenue ${this.registerPrenom} ! Votre compte a été créé 🎉`;
+        console.log('Redirecting to home...');
+        
         setTimeout(() => {
-          this.router.navigate(['/dashboard']); // CORRECTION: enlever le ;;
+          this.router.navigate(['/'])
+            .then(success => console.log('Navigation success:', success))
+            .catch(err => console.error('Navigation error:', err));
         }, 1500);
       } else {
         this.errorMessage = result.message;
@@ -113,6 +128,7 @@ export class AuthComponent {
     }, 800);
   }
 
+  // Utilitaires
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
