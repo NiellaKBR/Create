@@ -41,8 +41,11 @@ export class AuthComponent {
     this.isLoginMode = !this.isLoginMode;
     this.clearMessages();
   }
-
   onLogin() {
+    console.log('🔍 onLogin appelée');
+    console.log('📧 Email:', this.loginEmail);
+    console.log('🔒 Password:', this.loginPassword);
+
     this.clearMessages();
 
     if (!this.loginEmail || !this.loginPassword) {
@@ -54,14 +57,26 @@ export class AuthComponent {
 
     setTimeout(() => {
       const result = this.authService.login(this.loginEmail, this.loginPassword);
+      console.log('📝 Résultat login:', result);
+
       this.isLoading = false;
 
       if (result.success) {
+        console.log('🎉 Connexion réussie!');
         this.successMessage = `Bienvenue ${result.user?.prenom} ! 🎉`;
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          console.log('🔄 Redirection vers dashboard...');
+          // Utiliser la même méthode pour les deux
+          this.router.navigate(['/dashboard']).then(success => {
+            console.log('Navigation réussie:', success);
+            if (!success) {
+              console.log('Fallback vers window.location');
+              window.location.href = '/dashboard';
+            }
+          });
         }, 1500);
       } else {
+        console.log('❌ Échec connexion:', result.message);
         this.errorMessage = result.message;
       }
     }, 800);
@@ -77,11 +92,6 @@ export class AuthComponent {
 
     if (this.registerPassword.length < 6) {
       this.errorMessage = 'Le mot de passe doit contenir au moins 6 caractères';
-      return;
-    }
-
-    if (this.registerPassword !== this.registerConfirmPassword) {
-      this.errorMessage = 'Les mots de passe ne correspondent pas';
       return;
     }
 
@@ -105,7 +115,12 @@ export class AuthComponent {
       if (result.success) {
         this.successMessage = `Bienvenue ${this.registerPrenom} ! Votre compte a été créé 🎉`;
         setTimeout(() => {
-          this.router.navigate(['/dashboard']); // CORRECTION: enlever le ;;
+          // Même méthode que login pour cohérence
+          this.router.navigate(['/dashboard']).then(success => {
+            if (!success) {
+              window.location.href = '/dashboard';
+            }
+          });
         }, 1500);
       } else {
         this.errorMessage = result.message;

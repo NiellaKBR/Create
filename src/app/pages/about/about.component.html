@@ -1,1 +1,155 @@
-<p>about works!</p>
+<section class="min-h-screen bg-gradient-to-br from-slate-50 to-white pt-24 pb-16">
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 text-center mb-20">
+        <span
+            class="inline-block px-4 py-2 bg-durex-green/10 text-durex-green rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+            About
+        </span>
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            DUREX Management
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Votre partenaire de confiance pour la croissance et l'excellence de votre entreprise au Burkina Faso
+        </p>
+    </div>
+
+    <!-- Notre Histoire -->
+    <div class="container mx-auto px-4 mb-20">
+        <div class="bg-white rounded-3xl p-12 shadow-xl border border-gray-100">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Notre Histoire</h2>
+                    <div class="space-y-4 text-gray-600 leading-relaxed">
+                        <p>
+                            Fondée en <strong class="text-durex-green">2023</strong> par <strong>MARC
+                                OUEDRAOGO</strong>,
+                            DUREX Management est née de la vision de créer un cabinet de conseil multidisciplinaire
+                            adapté aux réalités du marché burkinabè.
+                        </p>
+                        <p>
+                            Depuis plus de <strong class="text-durex-green">03 ans</strong>, nous accompagnons
+                            les entreprises dans leur développement en proposant une expertise complète dans
+                            <strong>7 domaines stratégiques</strong>.
+                        </p>
+                        <p>
+                            Aujourd'hui, DUREX Management est reconnu comme l'un des leaders du conseil
+                            aux entreprises au Burkina Faso, avec plus de <strong class="text-durex-green">500
+                                clients</strong>
+                            qui nous font confiance.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-durex-green to-emerald-500 rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-6">Nos Chiffres Clés</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div *ngFor="let stat of stats" class="text-center">
+                            <div class="text-3xl mb-2">{{ stat.icon }}</div>
+                            <div class="text-2xl font-bold mb-1">{{ stat.number }}</div>
+                            <div class="text-sm text-white/80">{{ stat.label }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notre Équipe -->
+    <div class="container mx-auto px-4 mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Notre Équipe Dirigeante</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Des experts reconnus qui mettent leur savoir-faire au service de votre réussite
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div *ngFor="let member of team"
+                class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 text-center">
+                <div class="text-6xl mb-4">{{ member.image }}</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ member.name }}</h3>
+                <div class="text-durex-green font-semibold mb-1">{{ member.position }}</div>
+                <div class="text-sm text-gray-500 mb-4">{{ member.speciality }} • {{ member.experience }}</div>
+                <p class="text-gray-600 text-sm mb-6 leading-relaxed">{{ member.description }}</p>
+                <a [href]="'mailto:' + member.contact"
+                    class="inline-flex items-center gap-2 text-durex-green hover:text-green-700 transition-colors text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    Contacter
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nos Valeurs -->
+    <div class="container mx-auto px-4 mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Nos Valeurs</h2>
+            <p class="text-xl text-gray-600">
+                Les principes qui guident notre action au quotidien
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div *ngFor="let value of values"
+                class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 text-center group">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br rounded-2xl flex items-center justify-center text-2xl text-white group-hover:scale-110 transition-transform"
+                    [ngClass]="value.color">
+                    {{ value.icon }}
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">{{ value.title }}</h3>
+                <p class="text-gray-600 text-sm">{{ value.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="container mx-auto px-4 mb-20">
+        <div class="bg-gray-50 rounded-3xl p-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Certifications & Partenariats</h2>
+                <p class="text-gray-600">
+                    Notre expertise reconnue par les instances professionnelles
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div *ngFor="let cert of certifications"
+                    class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 hover:shadow-md transition-shadow">
+                    <div class="w-8 h-8 bg-durex-green/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-durex-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-sm text-gray-700 font-medium">{{ cert }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="container mx-auto px-4">
+        <div class="bg-gradient-to-r from-durex-green to-emerald-500 rounded-3xl p-12 text-white text-center">
+            <h2 class="text-3xl font-bold mb-4">Prêt à nous rejoindre ?</h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Découvrez comment DUREX Management peut transformer votre entreprise
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button routerLink="/services"
+                    class="bg-white text-durex-green px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all">
+                    Découvrir nos services
+                </button>
+                <button routerLink="/contact"
+                    class="bg-white/20 text-white border-2 border-white/30 px-8 py-4 rounded-xl font-bold hover:bg-white/30 transition-all">
+                    Nous contacter
+                </button>
+            </div>
+        </div>
+    </div>
+
+</section>

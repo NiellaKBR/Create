@@ -1,0 +1,148 @@
+[debug] [2026-02-03T17:17:03.696Z] ----------------------------------------------------------------------
+[debug] [2026-02-03T17:17:03.703Z] Command:       /Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/bin/node /Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/bin/firebase init hosting
+[debug] [2026-02-03T17:17:03.703Z] CLI Version:   15.5.1
+[debug] [2026-02-03T17:17:03.703Z] Platform:      darwin
+[debug] [2026-02-03T17:17:03.703Z] Node Version:  v20.19.4
+[debug] [2026-02-03T17:17:03.703Z] Time:          Tue Feb 03 2026 17:17:03 GMT+0000 (Greenwich Mean Time)
+[debug] [2026-02-03T17:17:03.704Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/ouedraogofilwende/Mes Documents/developpements/durex/durex-management
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-02-03T17:17:24.261Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-03T17:17:24.262Z] > authorizing via signed-in user (kabore2daniella@gmail.com)
+[debug] [2026-02-03T17:17:56.980Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:17:56.981Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:17:56.985Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-02-03T17:17:56.986Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"dist/durex-management"}
+[debug] [2026-02-03T17:17:57.722Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 400
+[debug] [2026-02-03T17:17:57.723Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"error":{"code":400,"message":"Request contains an invalid argument.","status":"INVALID_ARGUMENT"}}
+[debug] [2026-02-03T17:17:57.724Z] Couldn't check if project ID dist/durex-management is available. Original error: FirebaseError: Failed to check if project ID is available. See firebase-debug.log for more info.
+[debug] [2026-02-03T17:18:43.633Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:18:43.633Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:18:43.634Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-02-03T17:18:43.634Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"dist/durex-management","name":"dist/durex-management"}
+[debug] [2026-02-03T17:18:45.345Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 400
+[debug] [2026-02-03T17:18:45.345Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":400,"message":"Request contains an invalid argument.","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"project_id","description":"project_id contains invalid characters"},{"field":"display_name","description":"project display name contains invalid characters"}]},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"url":"https://cloud.google.com/resource-manager/reference/rest/v1/projects"}]}]}}
+[debug] [2026-02-03T17:18:45.899Z] FirebaseError: Request to https://cloudresourcemanager.googleapis.com/v1/projects had HTTP Error: 400, Request contains an invalid argument.
+    at responseToError (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/apiv2.js:330:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
+[debug] [2026-02-03T17:18:57.186Z] ----------------------------------------------------------------------
+[debug] [2026-02-03T17:18:57.193Z] Command:       /Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/bin/node /Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/bin/firebase init hosting
+[debug] [2026-02-03T17:18:57.193Z] CLI Version:   15.5.1
+[debug] [2026-02-03T17:18:57.193Z] Platform:      darwin
+[debug] [2026-02-03T17:18:57.193Z] Node Version:  v20.19.4
+[debug] [2026-02-03T17:18:57.193Z] Time:          Tue Feb 03 2026 17:18:57 GMT+0000 (Greenwich Mean Time)
+[debug] [2026-02-03T17:18:57.193Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/ouedraogofilwende/Mes Documents/developpements/durex/durex-management
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-02-03T17:19:00.366Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-03T17:19:00.367Z] > authorizing via signed-in user (kabore2daniella@gmail.com)
+[debug] [2026-02-03T17:19:14.557Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:14.558Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:14.561Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-02-03T17:19:14.561Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"durex-management-bf"}
+[debug] [2026-02-03T17:19:15.135Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-02-03T17:19:15.135Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"durex-management-bf"}
+[debug] [2026-02-03T17:19:28.825Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:28.826Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:28.827Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-02-03T17:19:28.827Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"durex-management-bf","name":"durex-management-bf"}
+[debug] [2026-02-03T17:19:30.092Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-02-03T17:19:30.092Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.6156351142914719117"}
+[debug] [2026-02-03T17:19:30.094Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:30.094Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:30.094Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6156351142914719117 [none]
+[debug] [2026-02-03T17:19:30.912Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6156351142914719117 200
+[debug] [2026-02-03T17:19:30.912Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.6156351142914719117 {"name":"operations/create_project.global.6156351142914719117","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":9,"message":"Callers must accept Terms of Service","details":[{"@type":"type.googleapis.com/google.rpc.PreconditionFailure","violations":[{"type":"TOS","subject":"cloud","description":"Callers must accept Terms of Service"}]}]}}
+[debug] [2026-02-03T17:19:31.219Z] FirebaseError: Callers must accept Terms of Service
+    at OperationPoller.poll (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/operation-poller.js:25:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async createCloudProject (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/management/projects.js:237:29)
+    at async createFirebaseProjectAndLog (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/management/projects.js:102:9)
+    at async Object.doSetup (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/init/features/project.js:64:24)
+    at async init (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/init/index.js:82:13)
+    at async Command.initAction [as actionFn] (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/commands/init.js:226:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
+[debug] [2026-02-03T17:19:41.112Z] ----------------------------------------------------------------------
+[debug] [2026-02-03T17:19:41.114Z] Command:       /Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/bin/node /Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/bin/firebase init hosting
+[debug] [2026-02-03T17:19:41.114Z] CLI Version:   15.5.1
+[debug] [2026-02-03T17:19:41.114Z] Platform:      darwin
+[debug] [2026-02-03T17:19:41.114Z] Node Version:  v20.19.4
+[debug] [2026-02-03T17:19:41.114Z] Time:          Tue Feb 03 2026 17:19:41 GMT+0000 (Greenwich Mean Time)
+[debug] [2026-02-03T17:19:41.114Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/ouedraogofilwende/Mes Documents/developpements/durex/durex-management
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-02-03T17:19:43.867Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-03T17:19:43.867Z] > authorizing via signed-in user (kabore2daniella@gmail.com)
+[debug] [2026-02-03T17:19:53.184Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:53.185Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:19:53.190Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-02-03T17:19:53.190Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"durex-management-bf"}
+[debug] [2026-02-03T17:19:53.845Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-02-03T17:19:53.846Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"durex-management-bf"}
+[debug] [2026-02-03T17:21:51.565Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:21:51.566Z] Checked if tokens are valid: true, expires at: 1770142565869
+[debug] [2026-02-03T17:21:51.566Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-02-03T17:21:51.566Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"durex-management-bf","name":"dist/durex-management"}
+[debug] [2026-02-03T17:21:52.734Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 400
+[debug] [2026-02-03T17:21:52.734Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":400,"message":"field [display_name] has issue [project display name contains invalid characters]","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"display_name","description":"project display name contains invalid characters"}]},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"url":"https://cloud.google.com/resource-manager/reference/rest/v1/projects"}]}]}}
+[debug] [2026-02-03T17:21:53.043Z] FirebaseError: Request to https://cloudresourcemanager.googleapis.com/v1/projects had HTTP Error: 400, field [display_name] has issue [project display name contains invalid characters]
+    at responseToError (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/Users/ouedraogofilwende/.nvm/versions/node/v20.19.4/lib/node_modules/firebase-tools/lib/apiv2.js:330:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.

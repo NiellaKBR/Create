@@ -1,1 +1,92 @@
-<p>services works!</p>
+<section class="min-h-screen bg-gradient-to-br from-slate-50 to-white pt-24 pb-16">
+    <div class="container mx-auto px-4">
+
+        <!-- Hero Section Services -->
+        <div class="text-center mb-16">
+            <span
+                class="inline-block px-4 py-2 bg-durex-green/10 text-durex-green rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                Nos Expertises
+            </span>
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                7 Domaines d'Excellence
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+                DUREX Management vous accompagne avec une expertise reconnue dans tous les aspects de votre
+                développement
+            </p>
+
+            <!-- CTA conditionnel -->
+            <div *ngIf="!isLoggedIn" class="bg-amber-50 border border-amber-200 rounded-2xl p-6 max-w-2xl mx-auto">
+                <h3 class="text-lg font-semibold text-amber-800 mb-2">🔐 Accès Premium</h3>
+                <p class="text-amber-700 mb-4">Connectez-vous pour accéder aux détails complets, tarifs personnalisés et
+                    demandes directes</p>
+                <button routerLink="/auth"
+                    class="bg-gradient-to-r from-durex-green to-emerald-500 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    Se connecter pour plus de détails
+                </button>
+            </div>
+        </div>
+
+        <!-- Services Grid Public -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div *ngFor="let service of servicesPublic"
+                class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 relative">
+
+                <!-- Badge Preview pour non-connectés -->
+                <div *ngIf="!isLoggedIn"
+                    class="absolute top-4 right-4 bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">
+                    Aperçu
+                </div>
+
+                <div class="text-4xl mb-4">{{ service.icon }}</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{{ service.title }}</h3>
+                <p class="text-gray-600 mb-4">{{ service.description }}</p>
+
+                <!-- Features (limitées pour public) -->
+                <ul class="space-y-2 mb-6">
+                    <li *ngFor="let feature of service.features.slice(0, 2)"
+                        class="flex items-center gap-2 text-sm text-gray-600">
+                        <span class="w-1.5 h-1.5 bg-durex-green rounded-full"></span>
+                        {{ feature }}
+                    </li>
+                    <li *ngIf="service.features.length > 2 && !isLoggedIn"
+                        class="flex items-center gap-2 text-sm text-gray-400">
+                        <span class="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                        Et {{ service.features.length - 2 }} autres...
+                    </li>
+                </ul>
+
+                <!-- Tarif public -->
+                <div class="text-lg font-semibold text-durex-green mb-4">{{ service.tarif }}</div>
+
+                <!-- CTA différent selon statut -->
+                <button *ngIf="isLoggedIn"
+                    class="w-full bg-gradient-to-r from-durex-green to-emerald-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    Demander un devis
+                </button>
+                <button *ngIf="!isLoggedIn" routerLink="/auth"
+                    class="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+                    Se connecter pour commander
+                </button>
+            </div>
+        </div>
+
+        <!-- Section CTA principale -->
+        <div class="bg-gradient-to-r from-durex-green to-emerald-500 rounded-3xl p-12 text-white text-center">
+            <h2 class="text-3xl font-bold mb-4">Prêt à démarrer votre projet ?</h2>
+            <p class="text-xl text-white/90 mb-8">Nos experts vous accompagnent de A à Z</p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button *ngIf="!isLoggedIn" routerLink="/auth"
+                    class="bg-white text-durex-green px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all">
+                    🔐 Se connecter
+                </button>
+                <button routerLink="/contact"
+                    class="bg-white/20 text-white border-2 border-white/30 px-8 py-4 rounded-xl font-bold hover:bg-white/30 transition-all">
+                    📞 Contact Direct
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>

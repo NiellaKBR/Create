@@ -15,6 +15,7 @@ export class ModalComponent {
   @Input() type: 'devis' | 'contact' | 'confirmation' = 'devis';
   @Output() closeModal = new EventEmitter<void>();
   @Output() submitForm = new EventEmitter<any>();
+  @Input() types: 'devis' | 'contact' | 'consultation' | 'appel' | 'confirmation' = 'devis';
 
   // Formulaire Devis Express
   devisForm = {
@@ -55,4 +56,26 @@ export class ModalComponent {
       this.close();
     }
   }
+
+  // Ajoutons les nouveaux formulaires
+  consultationForm = {
+    prenom: '',
+    nom: '',
+    email: '',
+    telephone: '',
+    sujet: '',
+    datePreferee: '',
+    heurePreferee: '',
+    dureeEstimee: '30min'
+  };
+
+  appelForm = {
+    prenom: '',
+    nom: '',
+    telephone: '',
+    creneauPreference: '',
+    sujet: '',
+    urgence: 'normale'
+  };
+
 }

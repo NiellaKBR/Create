@@ -1,0 +1,132 @@
+<section class="min-h-screen bg-gradient-to-br from-slate-50 to-white pt-24 pb-16">
+    <div class="container mx-auto px-4">
+
+        <!-- Header Premium -->
+        <div class="text-center mb-16">
+            <div
+                class="inline-block px-6 py-3 bg-gradient-to-r from-durex-green to-emerald-500 text-white rounded-full font-semibold mb-4">
+                🌟 Espace Premium - {{ currentUser?.prenom }}
+            </div>
+            <h1 class="text-5xl font-bold text-gray-900 mb-6">
+                Services Détaillés & Personnalisés
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Accès complet aux processus, tarifs négociés et demandes directes
+            </p>
+        </div>
+
+        <!-- Services Premium Detailed -->
+        <div class="space-y-12">
+            <div *ngFor="let service of servicesPremium"
+                class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+
+                <!-- Service Header -->
+                <div class="bg-gradient-to-r from-durex-green to-emerald-500 p-8 text-white">
+                    <div class="flex items-center gap-4">
+                        <div class="text-5xl">{{ service.icon }}</div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">{{ service.title }}</h2>
+                            <p class="text-white/90 text-lg">{{ service.description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-8">
+                    <div class="grid lg:grid-cols-3 gap-8">
+
+                        <!-- Features détaillées -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">✨ Prestations incluses</h3>
+                            <ul class="space-y-3">
+                                <li *ngFor="let feature of service.features"
+                                    class="flex items-start gap-3 text-gray-700">
+                                    <span class="w-2 h-2 bg-durex-green rounded-full mt-2 flex-shrink-0"></span>
+                                    {{ feature }}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Processus détaillé -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">🔄 Notre processus</h3>
+                            <div class="space-y-3">
+                                <div *ngFor="let step of service.process; let i = index" class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 bg-durex-green text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                        {{ i + 1 }}
+                                    </div>
+                                    <span class="text-gray-700 text-sm">{{ step }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarifs premium -->
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">💎 Tarifs personnalisés</h3>
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <div class="text-sm text-gray-600">Formule Basic</div>
+                                    <div class="text-lg font-bold text-durex-green">{{ service.tarifs.basic }}</div>
+                                </div>
+                                <div class="bg-durex-green/10 p-4 rounded-xl border-2 border-durex-green/20">
+                                    <div class="text-sm text-durex-green font-semibold">Formule Premium ⭐</div>
+                                    <div class="text-lg font-bold text-durex-green">{{ service.tarifs.premium }}</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <div class="text-sm text-gray-600">Formule Enterprise</div>
+                                    <div class="text-lg font-bold text-durex-green">{{ service.tarifs.enterprise }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Infos premium -->
+                            <div class="mt-4 space-y-2 text-sm text-gray-600">
+                                <div class="flex items-center gap-2">
+                                    <span>⏱️</span>
+                                    <span>Délai: {{ service.delai }}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span>✅</span>
+                                    <span>{{ service.garantie }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Actions Premium -->
+                    <div class="mt-8 flex gap-4 justify-center">
+                        <button (click)="openDevisModal(service)"
+                            class="bg-gradient-to-r from-durex-green to-emerald-500 text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition-all">
+                            ⚡ Demande Express (2h)
+                        </button>
+                        <button
+                            class="bg-blue-50 text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-blue-100 transition-all">
+                            📅 Planifier Consultation
+                        </button>
+                        <button
+                            class="bg-gray-100 text-gray-700 px-8 py-4 rounded-xl font-bold hover:bg-gray-200 transition-all">
+                            📞 Appel Direct
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Nouveaux modals -->
+        <app-modal [isOpen]="isConsultationModalOpen" [title]="'Planifier Consultation'" [types]="'consultation'"
+            (closeModal)="closeModal()" (submitForm)="onConsultationSubmit($event)">
+        </app-modal>
+
+        <app-modal [isOpen]="isAppelModalOpen" [title]="'Appel Direct'" [types]="'appel'" (closeModal)="closeModal()"
+            (submitForm)="onAppelSubmit($event)">
+        </app-modal>
+
+    </div>
+</section>
+
+<!-- Modal Premium -->
+<app-modal [isOpen]="isDevisModalOpen" [title]="'Devis Premium - ' + selectedService?.title" [type]="'devis'"
+    (closeModal)="closeModal()" (submitForm)="onDevisSubmit($event)">
+</app-modal>
